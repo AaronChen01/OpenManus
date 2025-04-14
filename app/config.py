@@ -49,13 +49,20 @@ class SearchSettings(BaseModel):
         default=3,
         description="Maximum number of times to retry all engines when all fail",
     )
-    lang: str = Field(
-        default="en",
-        description="Language code for search results (e.g., en, zh, fr)",
-    )
-    country: str = Field(
-        default="us",
-        description="Country code for search results (e.g., us, cn, uk)",
+    lang: str = Field(default="en", description="Language code for search results")
+    country: str = Field(default="us", description="Country code for search results")
+
+
+class EmailSettings(BaseModel):
+    """Configuration for email sending functionality."""
+
+    smtp_server: str = Field(..., description="SMTP server address")
+    smtp_port: int = Field(..., description="SMTP server port")
+    smtp_username: str = Field(..., description="SMTP username/email")
+    smtp_password: str = Field(..., description="SMTP password")
+    use_tls: bool = Field(default=True, description="Whether to use TLS")
+    default_sender: Optional[str] = Field(
+        None, description="Default sender name to use in emails"
     )
 
 
@@ -116,6 +123,9 @@ class AppConfig(BaseModel):
     )
     search_config: Optional[SearchSettings] = Field(
         None, description="Search configuration"
+    )
+    email_config: Optional[EmailSettings] = Field(
+        None, description="Email configuration"
     )
     mcp_config: Optional[MCPSettings] = Field(None, description="MCP configuration")
 
@@ -214,6 +224,10 @@ class Config:
         search_settings = None
         if search_config:
             search_settings = SearchSettings(**search_config)
+        email_config = raw_config.get("email", {})
+        email_settings = None
+        if email_config:
+            email_settings = EmailSettings(**email_config)
         sandbox_config = raw_config.get("sandbox", {})
         if sandbox_config:
             sandbox_settings = SandboxSettings(**sandbox_config)
@@ -238,6 +252,7 @@ class Config:
             "sandbox": sandbox_settings,
             "browser_config": browser_settings,
             "search_config": search_settings,
+            "email_config": email_settings,
             "mcp_config": mcp_settings,
         }
 
@@ -258,6 +273,11 @@ class Config:
     @property
     def search_config(self) -> Optional[SearchSettings]:
         return self._config.search_config
+
+    @property
+    def email_config(self) -> Optional[EmailSettings]:
+        """Get the email configuration"""
+        return self._config.email_config
 
     @property
     def mcp_config(self) -> MCPSettings:

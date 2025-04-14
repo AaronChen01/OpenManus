@@ -84,6 +84,21 @@ temperature = 0.0                          # Controls randomness for vision mode
 # Country code for search results. Options: "us" (United States), "cn" (China), etc.
 #country = "us"
 
+# Optional configuration for email functionality
+# [email]
+# SMTP server address
+#smtp_server = "smtp.gmail.com"
+# SMTP server port (587 for TLS, 465 for SSL)
+#smtp_port = 587
+# SMTP username/email address
+#smtp_username = "your-email@gmail.com"
+# SMTP password or app password
+#smtp_password = "your-password-or-app-password"
+# Whether to use TLS (true for port 587, false for port 465 with SSL)
+#use_tls = true
+# Optional default sender name
+#default_sender = "Your Name"
+
 
 ## Sandbox configuration
 #[sandbox]

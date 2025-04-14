@@ -21,7 +21,7 @@ Manus 非常棒，但 OpenManus 无需邀请码即可实现任何创意 🛫！
 
 用 OpenManus 开启你的智能体之旅吧！
 
-我们也非常高兴地向大家介绍 [OpenManus-RL](https://github.com/OpenManus/OpenManus-RL)，这是一个专注于基于强化学习（RL，例如 GRPO）的方法来优化大语言模型（LLM）智能体的开源项目，由来自UIUC 和 OpenManus 的研究人员合作开发。
+我们也非常高兴地向大家介绍 [OpenManus-RL](https://github.com/OpenManus/OpenManus-RL)，这是一个专注于基于强化学习（RL，例如 GRPO）的方法来优化大语言模型（LLM）智能体的开源项目，由来自 UIUC 和 OpenManus 的研究人员合作开发。
 
 ## 项目演示
 
@@ -84,11 +84,54 @@ uv pip install -r requirements.txt
 ```
 
 ### 浏览器自动化工具（可选）
+
 ```bash
 playwright install
 ```
 
 ## 配置说明
+
+\`\`\`bash
+python main.py
+\`\`\`
+
+然后通过终端输入你的创意！
+
+如需使用 MCP 工具版本，可运行：
+\`\`\`bash
+python run_mcp.py
+\`\`\`
+
+如需体验不稳定的多智能体版本，可运行：
+
+\`\`\`bash
+python run_flow.py
+\`\`\`
+
+## 可用工具
+
+OpenManus 内置了多种工具，帮助智能体完成各种任务：
+
+- **Bash**：在主机系统上执行 shell 命令
+- **BrowserUseTool**：自动化网页浏览任务
+- **DeepResearch**：对主题进行深入研究
+- **EmailSender**：向指定收件人发送电子邮件
+- **StrReplaceEditor**：通过字符串替换编辑文件
+- **WebSearch**：在网络上搜索信息
+- **PlanningTool**：创建和管理任务计划
+
+要配置邮件工具，请在 `config/config.toml` 文件中添加以下内容：
+
+\`\`\`toml
+[email]
+smtp_server = "smtp.example.com"
+smtp_port = 587
+smtp_username = "your-email@example.com"
+smtp_password = "your-password-or-app-password"
+use_tls = true
+\`\`\`
+
+## 贡献指南
 
 OpenManus 需要配置使用的 LLM API，请按以下步骤设置：
 
@@ -127,6 +170,7 @@ python main.py
 然后通过终端输入你的创意！
 
 如需使用 MCP 工具版本，可运行：
+
 ```bash
 python run_mcp.py
 ```
@@ -157,10 +201,11 @@ python run_flow.py
 
 [![Star History Chart](https://api.star-history.com/svg?repos=mannaandpoem/OpenManus&type=Date)](https://star-history.com/#mannaandpoem/OpenManus&Date)
 
-
 ## 赞助商
+
 感谢[PPIO](https://ppinfra.com/user/register?invited_by=OCPKCN&utm_source=github_openmanus&utm_medium=github_readme&utm_campaign=link) 提供的算力支持。
-> PPIO派欧云：一键调用高性价比的开源模型API和GPU容器
+
+> PPIO 派欧云：一键调用高性价比的开源模型 API 和 GPU 容器
 
 ## 致谢
 
